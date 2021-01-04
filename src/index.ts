@@ -7,10 +7,10 @@ export interface VibrationEvent {
   pattern?: VibrationPattern;
 }
 
-export const vibration = (
+function vibration(
   appContext: ApplicationVueContext,
   vibrationEvents: VibrationEvent[] = DEFAULT_VIBRATION_EVENTS
-) => {
+) {
   const { intercept } = useIntercept(appContext);
 
   for (const vibrationEvent of vibrationEvents) {
@@ -20,13 +20,15 @@ export const vibration = (
     }
     intercept(vibrationEvent.interceptorKey, () => vibrate(pattern));
   }
-};
+}
+export default vibration;
 
 /**
  * Triggers the vibration if supported.
  * @param {number|Array} pattern see https://developer.mozilla.org/en-US/docs/Web/API/Vibration_API#Describing_vibrations
  */
-const vibrate = (pattern: VibrationPattern = DEFAULT_PATTERN) => {
+export const vibrate = (pattern: VibrationPattern = DEFAULT_PATTERN) => {
+  console.log('Vibrate brrrr');
   if ('vibrate' in navigator) {
     navigator.vibrate(pattern);
   }

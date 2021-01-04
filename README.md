@@ -1,6 +1,6 @@
 # Shopware PWA Vibration
 
-This provides [Vibration API](https://developer.mozilla.org/en-US/docs/Web/API/Vibration_API) functionality for [Shopware PWA](https://github.com/vuestorefront/shopware-pwa) using its interceptor feature.
+This plugin provides [Vibration API](https://developer.mozilla.org/en-US/docs/Web/API/Vibration_API) functionality for [Shopware PWA](https://github.com/vuestorefront/shopware-pwa) using its [interceptor feature](https://shopware-pwa-docs.vuestorefront.io/landing/concepts/interceptor.html#usage-examples). This works as an progressive enhancement: if the feature is not supported by the clients browser or the used device does not have a vibration feature (e.g. notebooks), this plugin will do nothing.
 
 ## Setup
 
@@ -9,7 +9,7 @@ This provides [Vibration API](https://developer.mozilla.org/en-US/docs/Web/API/V
 
 ```js
 // src/plugins/vibration.js
-import { vibration } from 'shopware-pwa-vibration';
+import vibration from 'shopware-pwa-vibration';
 
 export default ({ app }) => {
   vibration(app); // using defaults
@@ -17,7 +17,7 @@ export default ({ app }) => {
 };
 ```
 
-3. Add the new plugin in `nuxt.config.js`
+3. Add the new plugin in `nuxt.config.js`. It's important that the **mode** is set to **client**, so that the code only ends up in the client bundle and therefore only runs on the client side.
 
 ```js
 // nuxt.config.js
@@ -28,13 +28,13 @@ plugins: [{ src: '~/plugins/vibration', mode: 'client' }],
 
 ## Options
 
-This plugin ships with the following options:
+You can customize some of the behaviour of this plugin using the following options:
 
 ### vibrationEvents
 
 Array of `VibrationEvent` objects that are used to configure the vibration events (when should the device vibrate) and patterns (how should the device vibrate)
 
-Default: vibrate when:
+Per default the device vibrates when:
 
 - adding a product to cart
 - adding a promotion code
@@ -64,7 +64,7 @@ Here is an example only vibrating on "add to cart" with a custom vibration patte
 ```js
 // src/plugins/vibration.js
 import { INTERCEPTOR_KEYS } from '@shopware-pwa/composables';
-import { vibration } from 'shopware-pwa-vibration';
+import vibration from 'shopware-pwa-vibration';
 
 export default ({ app }) => {
   vibration(app, [
@@ -76,10 +76,21 @@ export default ({ app }) => {
 };
 ```
 
+## Trigger vibration programatically
+
+This package also exports the `vibrate` function itself to use it anywhere in your application.
+
+```js
+import { vibrate } from 'shopware-pwa-vibration';
+
+vibrate(); // uses default vibration pattern
+vibrate(pattern); // custom vibration pattern, see options
+```
+
 ## Supported Browsers
 
 This depends obviously on the current status of [browser compatibility for the Vibration API](https://developer.mozilla.org/en-US/docs/Web/API/Vibration_API#Browser_compatibility).
-Also this is mostly relevant on mobile devices, so here's the compatibility in short ast time I checked:
+Also this is mostly relevant on mobile devices, so here's the compatibility in short (last time I checked):
 
 - ✅ Android Browsers
 - ❌ Safari & iOS Safari
