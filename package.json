@@ -54,5 +54,21 @@
   },
   "dependencies": {
     "@shopware-pwa/composables": "^0.6.1"
-  }
+  },
+  "description": "This plugin provides [Vibration API](https://developer.mozilla.org/en-US/docs/Web/API/Vibration_API) functionality for [Shopware PWA](https://github.com/vuestorefront/shopware-pwa) using its [interceptor feature](https://shopware-pwa-docs.vuestorefront.io/landing/concepts/interceptor.html#usage-examples). This works as an progressive enhancement: if the feature is not supported by the clients browser or the used device does not have a vibration feature (e.g. notebooks), this plugin will do nothing.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niklaswolf/shopware-pwa-vibration.git"
+  },
+  "keywords": [
+    "shopware",
+    "pwa",
+    "plugin",
+    "vibration",
+    "nuxt"
+  ],
+  "bugs": {
+    "url": "https://github.com/niklaswolf/shopware-pwa-vibration/issues"
+  },
+  "homepage": "https://github.com/niklaswolf/shopware-pwa-vibration#readme"
 }

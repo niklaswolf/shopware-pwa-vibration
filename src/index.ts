@@ -28,7 +28,6 @@ export default vibration;
  * @param {number|Array} pattern see https://developer.mozilla.org/en-US/docs/Web/API/Vibration_API#Describing_vibrations
  */
 export const vibrate = (pattern: VibrationPattern = DEFAULT_PATTERN) => {
-  console.log('Vibrate brrrr');
   if ('vibrate' in navigator) {
     navigator.vibrate(pattern);
   }
